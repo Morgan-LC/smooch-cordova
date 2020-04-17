@@ -1,5 +1,4 @@
-# Maintenance
-This repository is no longer being maintained. If you actively use this and want to become a maintainer let us know at help@smooch.io.
+> Maintainer needed. PRs welcomed. If you actively use this and want to become a maintainer let us know at help@smooch.io.
 
 # smooch-cordova
 Cordova (PhoneGap) bindings for [Smooch](https://smooch.io).

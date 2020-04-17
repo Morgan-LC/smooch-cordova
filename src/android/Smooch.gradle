@@ -1,6 +1,6 @@
 dependencies {
-    compile 'io.smooch:core:5.+'
-    compile 'io.smooch:ui:5.+'
+    compile 'io.smooch:core:6.+'
+    compile 'io.smooch:ui:6.+'
 }
 
 allprojects {

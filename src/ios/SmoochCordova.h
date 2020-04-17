@@ -18,4 +18,9 @@
 - (void)setUser:(CDVInvokedUrlCommand *)command;
 - (void)setUserProperties:(CDVInvokedUrlCommand *)command;
 
+- (void)sendMessage:(CDVInvokedUrlCommand *)command;
+
+- (void)loadConversation:(CDVInvokedUrlCommand *)command;
+- (void)close:(CDVInvokedUrlCommand *)command;
+
 @end

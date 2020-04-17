@@ -34,8 +34,8 @@
         <framework src="AssetsLibrary.framework" />
         <framework src="Photos.framework" />
         <framework src="AVFoundation.framework" />
-        <framework src="Smooch" type="podspec" spec="~> 6.0" />
 
+        <framework src="Smooch" type="podspec" spec="~> 7.0" />
     </platform>
 
     <!-- android -->
@@ -52,7 +52,6 @@
 
         <hook type="after_plugin_install" src="scripts/afterInstall.js" />
         <hook type="before_plugin_uninstall" src="scripts/beforeUninstall.js" />
-
         <framework src="src/android/Smooch.gradle" custom="true" type="gradleReference" />
     </platform>
 

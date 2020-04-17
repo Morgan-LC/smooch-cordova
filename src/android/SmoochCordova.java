@@ -8,7 +8,9 @@ import org.apache.cordova.CallbackContext;
 
 import android.util.Log;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -24,11 +26,9 @@ public class SmoochCordova extends CordovaPlugin {
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         if (action.equals("init")) {
-            Log.w("SmoochCordova", "Initialize must be done from the Application Class");
-            callbackContext.success();
-            return true;
+            this.init(args, callbackContext);
         } else if (action.equals("show")) {
-            this.show(callbackContext);
+            this.loadConversation(args,callbackContext);
         } else if (action.equals("setUser")) {
             this.setUser(args, callbackContext);
         } else if (action.equals("setUserProperties")) {
@@ -37,12 +37,46 @@ public class SmoochCordova extends CordovaPlugin {
             this.login(args, callbackContext);
         } else if (action.equals("logout")) {
             this.logout(callbackContext);
+        } else if (action.equals("loadConversation")) {
+            this.loadConversation(args, callbackContext);
         } else {
             callbackContext.error("Smooch method not supported");
             return false;
         }
 
         return true;
+    }
+
+    private void init(JSONArray args,CallbackContext callbackContext) {
+        try {
+            final Map<String,Object> arguments = toMap(args.getJSONObject(0));
+            SmoochApplication.init(""+arguments.get("appId"));
+            callbackContext.success();
+        }  catch (JSONException e) {
+            callbackContext.error(e.getMessage());
+        }
+    }
+
+    private void loadConversation(JSONArray args, CallbackContext callbackContext) {
+        try {
+            final String convId = args.getString(0);
+            Log.w("SmoochCordova load", "conversationId" + convId);
+            Smooch.loadConversation(convId, new SmoochCallback() {
+                @Override
+                public void run(Response response) {
+                    if (response.getError() == null) {
+                        Log.w("SmoochCordova load", "success" + response);
+                        show(callbackContext);
+
+                    } else {
+                        Log.w("SmoochCordova load", "error" + response);
+                        callbackContext.error(response.getError());
+                    }
+                }
+            });
+        }  catch (JSONException e) {
+            callbackContext.error(e.getMessage());
+        }
     }
 
     private void show(CallbackContext callbackContext) {
@@ -117,14 +151,13 @@ public class SmoochCordova extends CordovaPlugin {
     }
 
     private void logout(final CallbackContext callbackContext) {
+
+
         Smooch.logout(new SmoochCallback() {
+
             @Override
             public void run(Response response) {
-                if (response.getError() == null) {
-                    callbackContext.success();
-                } else {
-                    callbackContext.error(response.getError());
-                }
+
             }
         });
     }

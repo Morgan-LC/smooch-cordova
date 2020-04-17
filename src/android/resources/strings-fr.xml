@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="Smooch_activityConversation">Hello</string>
+    <string name="Smooch_startOfConversation">This is the start of your conversation with the team.</string>
+    <string name="Smooch_welcome">Feel free to leave us a message about anything that\'s on your mind.</string>
+    <string name="Smooch_messageHint">Taper un message</string>
+</resources>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+      <color name="Smooch_accent">#0078fa</color>
+      <color name="Smooch_accentDark">#0078fa</color>
+      <color name="Smooch_accentLight">#0078fa</color>
+      <color name="Smooch_backgroundInput">#ffffff</color>
+      <color name="Smooch_btnSendHollow">#0078fa</color>
+      <color name="Smooch_btnSendHollowBorder">#0078fa</color>
+      <color name="Smooch_header">#0078fa</color>
+      <color name="Smooch_messageDate">@color/Smooch_header</color>
+      <color name="Smooch_messageShadow">#0078fa99</color>
+      <color name="Smooch_conversationBackground">#ecebeb</color>
+      <color name="Smooch_remoteMessageAuthor">@color/Smooch_header</color>
+      <color name="Smooch_remoteMessageBackground">#ffffff</color>
+      <color name="Smooch_remoteMessageBorder">#0078fa</color>
+      <color name="Smooch_remoteMessageText">#000000</color>
+      <color name="Smooch_userMessageBackground">@color/Smooch_accent</color>
+      <color name="Smooch_userMessageBorder">@color/Smooch_accentDark</color>
+      <color name="Smooch_userMessageFailedBackground">@color/Smooch_accentLight</color>
+      <color name="Smooch_userMessageText">#ffffff</color>
+</resources>

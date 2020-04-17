@@ -14,7 +14,8 @@
 - (void)init:(CDVInvokedUrlCommand *)command {
     NSMutableDictionary *settings = [[NSMutableDictionary alloc]
         initWithDictionary:[command argumentAtIndex:0]];
-
+    [Smooch destroy];
+    
     SKTSettings *sktSettingsObj = [[SKTSettings alloc] init];
 
     if ([settings valueForKey:@"conversationAccentColor"]) {
@@ -64,7 +65,7 @@
 
 - (void)setUser:(CDVInvokedUrlCommand *)command {
     NSDictionary *user = [command argumentAtIndex:0];
-
+    
     SKTUser *currentUser = [SKTUser currentUser];
     [currentUser setValuesForKeysWithDictionary:user];
 
@@ -79,11 +80,34 @@
 
 - (void)setUserProperties:(CDVInvokedUrlCommand *)command {
     NSDictionary *properties = [command argumentAtIndex:0];
-
+    
     SKTUser *currentUser = [SKTUser currentUser];
     [currentUser addProperties:properties];
 
     [self sendSuccess:command];
+}
+
+#pragma mark - Conversation
+
+- (void)sendMessage:(CDVInvokedUrlCommand *)command {
+  [[Smooch conversation] sendMessage:[[SKTMessage alloc] initWithText: [command argumentAtIndex:0]]];
+  [self sendSuccess:command];
+}
+
+- (void)close:(CDVInvokedUrlCommand *)command {
+    [Smooch close];
+    [self sendSuccess:command];
+}
+
+- (void)loadConversation:(CDVInvokedUrlCommand *)command {
+    NSString *conversationId = [command argumentAtIndex:0];
+    [Smooch loadConversation:conversationId completionHandler:^(NSError * _Nullable error, NSDictionary * _Nullable userInfo) {
+        if(!error){
+            [self sendSuccess:command];
+        } else {
+            [self sendFailure:command];
+        }
+    }];
 }
 
 #pragma mark - Private Methods
